@@ -1,52 +1,59 @@
 function HeroSection() {
-  return (
-    <div className="px-4 md:px-8 lg:px-25">
-      <div className="flex flex-col md:flex-row justify-between items-center pt-8 gap-8">
-        {/* Image - will appear first on mobile */}
-        <div className="w-full md:w-1/2 flex justify-center md:order-2">
-          <img
-            className="w-full max-w-md md:w-80"
-            src="/assets/images/image-hero-desktop.png"
-            alt="Hero"
-          />
-        </div>
+  const Logos = [
+    '/assets/images/client-databiz.svg',
+    '/assets/images/client-audiophile.svg',
+    '/assets/images/client-meet.svg',
+    '/assets/images/client-maker.svg',
+  ];
 
-        {/* Text content - will appear second on mobile */}
-        <div className="md:mt-9 text-center md:text-left w-full md:w-1/2 md:order-1">
-          <h1 className="text-black text-4xl md:text-6xl font-bold">
-            Make remote work
+  return (
+    <div className=" md:px-8 lg:px-50 lg:pt-13 pt-4 overflow-hidden">
+      <div className="flex flex-col-reverse lg:flex-row items-center gap-5">
+        <div className="w-full text-center lg:text-left">
+          <h1 className="text-black text-3xl md:text-5xl lg:text-6xl font-bold leading-none">
+            Make <br className="hidden sm:block " /> remote work
           </h1>
-          <p className="text-sm md:text-[15px] text-gray-600 font-semibold pt-4 md:pt-8 max-w-md mx-auto md:mx-0">
-            Get your team in sync, no matter your location. Streamline
-            processes, create team rituals, and watch productivity soar.
+
+          <p className=" text-md text-gray-500 font-medium p-3 md:pt-6">
+            Get your team in sync, no matter your location.
+            <br className="hidden sm:block" />
+            Streamline processes, create team rituals, and watch
+            <br className="hidden sm:block" />
+            productivity soar.
           </p>
 
-          <button className="border border-black bg-black text-white rounded-xl px-4 py-2 cursor-pointer mt-6 md:mt-8">
+          <button className="mt-6 md:mt-15 border border-black bg-black text-white rounded-xl px-5 py-3 hover:bg-white hover:text-black transition duration-300">
             Learn more
           </button>
 
-          <div className="flex justify-center md:justify-start gap-4 md:gap-6 mt-10 md:mt-15">
-            <img
-              className="w-16 md:w-[4.4rem] h-3 md:h-[0.8rem]"
-              src="/assets/images/client-databiz.svg"
-              alt="databiz"
-            />
-            <img
-              className="w-14 md:w-[3.7rem] h-6 md:h-[1.8rem]"
-              src="/assets/images/client-audiophile.svg"
-              alt="audiophile"
-            />
-            <img
-              className="w-12 md:w-[3.3rem] h-3 md:h-[0.8rem]"
-              src="/assets/images/client-meet.svg"
-              alt="meet"
-            />
-            <img
-              className="w-16 md:w-[4.3rem] h-4 md:h-[1rem]"
-              src="/assets/images/client-maker.svg"
-              alt="maker"
-            />
+          <div className="flex gap-3 justify-center lg:justify-start items-center mt-10 flex-wrap">
+            {Logos.map((logo, i) => (
+              <img
+                key={i}
+                src={logo}
+                alt={`logo-${i}`}
+                className="h-4  md:h-5 md:mt-4 w-auto object-contain"
+              />
+            ))}
           </div>
+        </div>
+
+        {/* Hero Image */}
+        <div className="w-full flex justify-center">
+          {/* Desktop */}
+          <img
+            src="/assets/images/image-hero-desktop.png"
+            alt="Hero"
+            className="hidden lg:block w-[80%] max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl object-contain"
+          />
+        </div>
+        <div>
+          {/* Mobile */}
+          <img
+            src="/assets/images/image-hero-mobile.png"
+            alt="Hero"
+            className="block lg:hidden w-full  object-contain"
+          />
         </div>
       </div>
     </div>
