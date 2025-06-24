@@ -29,7 +29,7 @@ const Dropdown = ({ label, isOpen, onToggle, options }: Props) => {
     };
   }, [isOpen, onToggle]);
 
-  const handleDropdownClick = (e: React.MouseEvent) => {
+  const handleDropdownClick = () => {
     onToggle();
   };
 
