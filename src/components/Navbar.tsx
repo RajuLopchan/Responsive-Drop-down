@@ -24,7 +24,7 @@ function Navbar() {
   ];
 
   return (
-    <nav className="flex items-center justify-between py-2 px-4 md:px-8 lg:px-24 relative">
+    <nav className="flex items-center justify-between py-2 px-4 md:px-8 lg:px-24 relative z-50">
       {/* Logo and Nav Links */}
       <div className="flex items-center gap-4 md:gap-6 lg:gap-12">
         <h1 className="text-3xl font-bold">snap</h1>
@@ -47,6 +47,7 @@ function Navbar() {
         </ul>
       </div>
 
+      {/* Desktop Buttons */}
       <div className="hidden lg:flex items-center gap-3 md:gap-4 text-gray-600">
         <button className="hover:text-black text-sm md:text-base font-medium cursor-pointer">
           Login
@@ -63,47 +64,64 @@ function Navbar() {
         </button>
       </div>
 
-      {/* Mobile Dropdown Menu */}
+      {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="absolute top-0 right-0 w-64 h-screen bg-white p-6 space-y-6 shadow-lg z-50 list-none">
-          <div className="flex justify-end mb-4">
-            <button
-              onClick={() => {
-                setMobileMenuOpen(false);
-                setOpenDropdown(null);
-              }}
-              className="text-2xl font-bold"
-            >
-              ×
-            </button>
-          </div>
+        <>
+          {/* Background Blur */}
+          <div
+            className="fixed inset-0 bg-black/40 backdrop-blur-sm z-30"
+            onClick={() => {
+              setMobileMenuOpen(false);
+              setOpenDropdown(null);
+            }}
+          ></div>
 
-          <div className="space-y-4">
-            <Dropdown
-              label="Features"
-              isOpen={openDropdown === 'features'}
-              onToggle={() => toggleDropdown('features')}
-              options={features}
-            />
-            <Dropdown
-              label="Company"
-              isOpen={openDropdown === 'company'}
-              onToggle={() => toggleDropdown('company')}
-              options={company}
-            />
-            <p className="hover:text-black cursor-pointer">Careers</p>
-            <p className="hover:text-black cursor-pointer">About</p>
-          </div>
+          {/* Mobile Menu Panel with animation */}
+          <div
+            className={`fixed top-0 right-0 w-[60%] h-screen bg-white p-6 space-y-6 shadow-lg z-50 list-none
+              transition-transform duration-300 transform
+              ${mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}
+            `}
+          >
+            <div className="flex justify-end mb-4">
+              <button
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  setOpenDropdown(null);
+                }}
+                className="text-2xl font-bold"
+              >
+                ×
+              </button>
+            </div>
 
-          <div className="mt-8 flex flex-col items-center gap-4">
-            <button className="hover:text-black text-sm font-medium">
-              Login
-            </button>
-            <button className="border border-gray-600 rounded-xl px-4 py-2 hover:bg-gray-100 text-sm font-medium">
-              Register
-            </button>
+            <div>
+              <Dropdown
+                label="Features"
+                isOpen={openDropdown === 'features'}
+                onToggle={() => toggleDropdown('features')}
+                options={features}
+              />
+              <Dropdown
+                label="Company"
+                isOpen={openDropdown === 'company'}
+                onToggle={() => toggleDropdown('company')}
+                options={company}
+              />
+              <p className="hover:text-black cursor-pointer">Careers</p>
+              <p className="hover:text-black cursor-pointer">About</p>
+            </div>
+
+            <div className="mt-8 flex flex-col items-center gap-4">
+              <button className="hover:text-black text-sm font-medium">
+                Login
+              </button>
+              <button className="border border-gray-600 rounded-xl px-4 py-2 hover:bg-gray-100 text-sm font-medium">
+                Register
+              </button>
+            </div>
           </div>
-        </div>
+        </>
       )}
     </nav>
   );

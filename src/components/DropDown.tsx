@@ -14,14 +14,14 @@ const Dropdown = ({ label, isOpen, onToggle, options }: Props) => {
   useEffect(() => {
     if (!isOpen) return;
 
-    function handleClickOutside(event: MouseEvent) {
+    const handleClickOutside = (event: MouseEvent) => {
       if (
         dropdownRef.current &&
         !dropdownRef.current.contains(event.target as Node)
       ) {
-        onToggle(); // Close the dropdown
+        onToggle();
       }
-    }
+    };
 
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
@@ -29,11 +29,15 @@ const Dropdown = ({ label, isOpen, onToggle, options }: Props) => {
     };
   }, [isOpen, onToggle]);
 
+  const handleDropdownClick = (e: React.MouseEvent) => {
+    onToggle();
+  };
+
   return (
-    <li ref={dropdownRef} className="relative list-none">
+    <li ref={dropdownRef} className="relative w-full lg:w-auto">
       <button
-        onClick={onToggle}
-        className="flex items-center gap-1 hover:text-black"
+        onClick={handleDropdownClick}
+        className="flex items-center gap-1 hover:text-black w-full lg:w-auto"
       >
         {label}
         <HiChevronDown
@@ -44,7 +48,13 @@ const Dropdown = ({ label, isOpen, onToggle, options }: Props) => {
       </button>
 
       {isOpen && (
-        <div className="absolute left-0 mt-2 bg-white shadow-lg p-4 rounded-lg w-48 space-y-2 z-50">
+        <div
+          className={`
+            mt-2 bg-white shadow-lg p-4 rounded-lg z-50
+            w-full lg:w-48
+            lg:absolute lg:left-0
+          `}
+        >
           {options.map((item) => (
             <div
               key={item.label}
